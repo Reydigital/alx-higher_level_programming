@@ -10,10 +10,12 @@ def safe_function(fct, *args):
 
     try:
 
-        return(fct(*args))
+        r = fct(*args)
 
-    except Exception as e:
+        return r
 
-        print("Exception:", e, file=sys.stderr)
+    except Exception as error:
 
-        return (None)
+        print("Exception: {}".format(error), file=sys.stderr)
+
+        return None
