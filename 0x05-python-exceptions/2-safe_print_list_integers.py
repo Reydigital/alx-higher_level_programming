@@ -2,23 +2,20 @@
 
 def safe_print_list_integers(my_list=[], x=0):
 
-    printed_values = 0
+    x = 0
 
-    try:
+    for i in range(x):
 
-        for i in range(0, x):
+        try:
 
-            if isinstance(my_list[i], int):
+            print("{:d}".format(my_list[i]), end="")
 
-                print("{:d}".format(my_list[i]), end='')
+            x += 1
 
-                printed_values += 1
+        except (ValueError, TypeError):
 
-        print()
+            continue
 
-        return (printed_values)
+    print()
 
-    except TypeError:
-
-        print()
-return c
+    return x
