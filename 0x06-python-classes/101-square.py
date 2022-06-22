@@ -1,40 +1,22 @@
 #!/usr/bin/python3
 
-"""Square module.
-
-This module contains a class that defines a square and its size and its
-
-position on the screen, checking if the given values are right, and a setter
-
-and getter methods to set or get them. A __str__ method is here to handle the
-
-use of the builtin print function. There's also an area method that returns
-
-the area of the square, another one that handles the print of the square.
-
-"""
+"""Coordinates of a square"""
 
 
 
 
 
-class Square():
+class Square:
 
-    """Defines a square."""
+    """Private instance attribute: size
+
+    Instantiation with area and position method """
 
 
 
     def __init__(self, size=0, position=(0, 0)):
 
-        """Sets the necessary attributes for the Square object.
-
-        Args:
-
-            size (int): the size of one edge of the square.
-
-            position (tuple): the coordinates of the square.
-
-        """
+        """Initializes attribute size """
 
         self.size = size
 
@@ -42,29 +24,11 @@ class Square():
 
 
 
-    def __str__(self):
+    def area(self):
 
-        """Sets the print behavior of the Square object."""
+        """Calculate area of square"""
 
-        square_str = ""
-
-
-
-        if self.__size > 0:
-
-            for y in range(self.__position[1]):
-
-                square_str += '\n'
-
-            for x in range(self.__size):
-
-                square_str += ' ' * self.__position[0]
-
-                square_str += '#' * self.__size + '\n'
-
-
-
-        return square_str[:-1]
+        return (self.__size * self.__size)
 
 
 
@@ -72,7 +36,7 @@ class Square():
 
     def size(self):
 
-        """Get or set the size of the square."""
+        """Getter for square"""
 
         return self.__size
 
@@ -82,19 +46,17 @@ class Square():
 
     def size(self, value):
 
-        if type(value) is int:
+        """Initializes attribute size """
 
-            if value >= 0:
-
-                self.__size = value
-
-            else:
-
-                raise ValueError("size must be >= 0")
-
-        else:
+        if (type(value) is not int):
 
             raise TypeError("size must be an integer")
+
+        if value < 0:
+
+            raise ValueError("size must be >= 0")
+
+        self.__size = value
 
 
 
@@ -102,7 +64,7 @@ class Square():
 
     def position(self):
 
-        """Get or set the position of the square."""
+        """Getter for position"""
 
         return self.__position
 
@@ -112,42 +74,48 @@ class Square():
 
     def position(self, value):
 
-        if type(value) is tuple and len(value) is 2 and \
+        """Initializes attribute position"""
 
-                type(value[0]) is int and type(value[1]) is int:
-
-            self.__position = value
-
-        else:
+        if len(value) is not 2:
 
             raise TypeError("position must be a tuple of 2 positive integers")
 
+        if (type(value[0]) is not int or value[0] < 0):
 
+            raise TypeError("position must be a tuple of 2 positive integers")
 
-    def area(self):
+        if (type(value[1]) is not int or value[1] < 0):
 
-        """Returns the current square area."""
+            raise TypeError("position must be a tuple of 2 positive integers")
 
-        return self.__size ** 2
+        self.__position = value
 
 
 
     def my_print(self):
 
-        """Prints the square with the # character on stdout."""
+        """Print method"""
 
-        if self.__size > 0:
+        print(self.__str__())
 
-            for y in range(self.__position[1]):
 
-                print()
 
-            for x in range(self.__size):
+    def __str__(self):
 
-                print(' ' * self.__position[0], end='')
+        """Print representation of squares"""
 
-                print('#' * self.__size)
+        if self.size == 0:
+
+            return
 
         else:
 
-            print()
+            str = '\n' * self.__position[1]
+
+        for i in range(self.__size):
+
+            str += ' ' * self.position[0]
+
+            str += '#' * self.__size + '\n'
+
+        return str[:-1]
