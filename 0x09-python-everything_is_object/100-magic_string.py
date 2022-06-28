@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
-def magic_string(static={"count": 0}):
+def magic_string(my_list=[]):
 
-    static["count"] += 1
+    my_list.append('Holberton')
 
-    return str("Holberton, " * static["count"])[:-2]
+    return (', '.join(my_list))
